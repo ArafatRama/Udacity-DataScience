@@ -50,6 +50,12 @@ Finally, the user is prompted with the choice of restarting the program or not.
 * [numpy](http://www.numpy.org/) - One of the libraries used for this.
 * [time](https://docs.python.org/2/library/time.html) - One of the libraries used for this.
 
+# To use: 
+* Clone This Repo
+* Make sure you have Python downloaded
+* Download Pandas in cmd: pip install pandas
+* run in local project cmd: python bikeshare_2.py
+
 # Author
 
  * [Rama Arafat].
