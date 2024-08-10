@@ -6,45 +6,35 @@ CITY_DATA = {'chicago': 'chicago.csv',
              'new york city': 'new_york_city.csv',
              'washington': 'washington.csv'}
 
+#Avoid Repetition in get_filters Function
+def get_user_input(prompt, options):
+    while True:
+        user_input = input(prompt).lower()
+        if user_input in options:
+            return user_input
+        else:
+            print("Invalid input. Please try again.")
 
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
-
     Returns:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # TO DO: get user input for city (chicago, new york city, washington). Used a while loop to handle invalid inputs
-    while True:
-        city = input('the city you are intrested in (chicago, new york city, washington) is: ').lower()
-        if city in CITY_DATA.keys():
-            break
-        else:
-            print('Your desired city does not seem to match out our data')
-    print(f'\n You have chosen {city.title()} as your city.')
 
-    # TO DO: get user input for month (all, january, february, ... , june)
-    while True:
-        month = input('the month you are intrested in (all, january, february, ... , june) is: ').lower()
-        if month in ['january', 'february', 'march', 'april', 'may', 'june', 'all']:
-            break
-        else:
-            print('Your desired month does not seem to match out our data')
+    city = get_user_input('The city you are interested in (chicago, new york city, washington) is: ', CITY_DATA.keys())
+    print(f'\nYou have chosen {city.title()} as your city.')
 
-    print(f'\n You have chosen {month.title()} as your month.')
+    month = get_user_input('The month you are interested in (all, january, february, ... , june) is: ',
+                           ['january', 'february', 'march', 'april', 'may', 'june', 'all'])
+    print(f'\nYou have chosen {month.title()} as your month.')
 
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    days = ['all', 'saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday']
-    while True:
-        day = input('the day of the week you are intrested in is: ').lower()
-        if day in days:
-            break
-        else:
-            print('Your desired day does not seem to match out our data')
-    print(f'\n You have chosen {day.title()} as your day.')
+    day = get_user_input('The day of the week you are interested in is: ',
+                         ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])
+    print(f'\nYou have chosen {day.title()} as your day.')
 
     print('-' * 40)
     return city, month, day
@@ -53,7 +43,6 @@ def get_filters():
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
-
     Args:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
@@ -170,7 +159,7 @@ def user_stats(df, city):
         most_earliest_year = df['Birth Year'].min()
         most_recent_year = df['Birth Year'].max()
         most_common_year = df['Birth Year'].mode()[0]
-        print("\nEarliest year of birth:{}, Most recent year of birth:{}, Most common year of birth {}".format(
+        print("\nEarliest year of birth {}, Most recent year of birth {}, Most common year of birth {}".format(
             most_earliest_year, most_recent_year, most_common_year))
     else:
         print("This city doesn't hold Birth Year data")
@@ -211,4 +200,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main() 
